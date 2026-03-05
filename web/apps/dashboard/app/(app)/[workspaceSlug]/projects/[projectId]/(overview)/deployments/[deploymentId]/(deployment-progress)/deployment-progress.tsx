@@ -3,6 +3,7 @@
 import { trpc } from "@/lib/trpc/client";
 import { CloudUp, Earth, Hammer2, LayerFront, Pulse, Sparkle3 } from "@unkey/icons";
 import { Button, SettingCardGroup } from "@unkey/ui";
+import type { inferRouterOutputs } from "@trpc/server";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DeploymentDomainsCard } from "../../../../components/deployment-domains-card";
@@ -11,22 +12,17 @@ import { RedeployDialog } from "../../components/table/components/actions/redepl
 import { useDeployment } from "../layout-provider";
 import { DeploymentBuildStepsTable } from "./build-steps-table/deployment-build-steps-table";
 import { DeploymentStep } from "./deployment-step";
+import type { Router } from "@/lib/trpc/routers";
 
-export function DeploymentProgress() {
+type RouterOutputs = inferRouterOutputs<Router>;
+export type StepsData = RouterOutputs["deploy"]["deployment"]["steps"];
+
+export function DeploymentProgress({ stepsData }: { stepsData?: StepsData }) {
   const { deployment } = useDeployment();
   const router = useRouter();
   const params = useParams();
   const workspaceSlug = params.workspaceSlug as string;
   const isFailed = deployment.status === "failed";
-
-  const steps = trpc.deploy.deployment.steps.useQuery(
-    {
-      deploymentId: deployment.id,
-    },
-    {
-      refetchInterval: 1_000,
-    },
-  );
 
   const buildSteps = trpc.deploy.deployment.buildSteps.useQuery(
     {
@@ -51,7 +47,7 @@ export function DeploymentProgress() {
     };
   }, [isFailed]);
 
-  const { building, deploying, network, queued, starting, finalizing } = steps.data ?? {};
+  const { building, deploying, network, queued, starting, finalizing } = stepsData ?? {};
 
   const [redeployOpen, setRedeployOpen] = useState(false);
   const domainsForDeployment = getDomainsForDeployment(deployment.id);
