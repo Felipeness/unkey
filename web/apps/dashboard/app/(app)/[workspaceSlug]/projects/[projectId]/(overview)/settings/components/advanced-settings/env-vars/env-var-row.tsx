@@ -18,7 +18,7 @@ import type { EnvVarItem } from "./utils";
 
 type EnvVarRowProps = {
   index: number;
-  isLast: boolean;
+  isFirst: boolean;
   isOnly: boolean;
   keyError: string | undefined;
   environmentError: string | undefined;
@@ -32,7 +32,7 @@ type EnvVarRowProps = {
 
 export const EnvVarRow = ({
   index,
-  isLast,
+  isFirst,
   isOnly,
   keyError,
   environmentError,
@@ -139,7 +139,7 @@ export const EnvVarRow = ({
           className={cn(
             "absolute left-0 size-9 hover:bg-grayA-3 px-0 justify-center transition-all duration-150 rounded-lg",
             isOnly ? "translate-x-0" : "translate-x-9",
-            isLast ? "opacity-100" : "opacity-0 pointer-events-none",
+            isFirst ? "opacity-100" : "opacity-0 pointer-events-none",
           )}
           onClick={onAdd}
         >
