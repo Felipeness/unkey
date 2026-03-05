@@ -10,7 +10,6 @@ import { DeploymentProgress, type StepsData } from "./(deployment-progress)/depl
 import { DeploymentNetworkSection } from "./(overview)/components/sections/deployment-network-section";
 import { useDeployment } from "./layout-provider";
 
-
 export default function DeploymentOverview() {
   const { deployment } = useDeployment();
   const { refetchDomains } = useProjectData();
@@ -19,7 +18,7 @@ export default function DeploymentOverview() {
 
   const stepsQuery = trpc.deploy.deployment.steps.useQuery(
     { deploymentId: deployment.id },
-    { refetchInterval: ready ? false : 1_000 },
+    { refetchInterval: ready ? false : 1_000, refetchOnWindowFocus: false },
   );
 
   const derivedStatus = useMemo(
@@ -52,17 +51,19 @@ export default function DeploymentOverview() {
 }
 
 const DEPLOYMENT_STATUSES: ReadonlySet<string> = new Set<DeploymentStatus>([
-  "pending", "building", "deploying", "network", "ready", "failed",
+  "pending",
+  "building",
+  "deploying",
+  "network",
+  "ready",
+  "failed",
 ]);
 
 function isDeploymentStatus(value: string): value is DeploymentStatus {
   return DEPLOYMENT_STATUSES.has(value);
 }
 
-function deriveStatusFromSteps(
-  steps: StepsData | undefined,
-  fallback: string,
-): DeploymentStatus {
+function deriveStatusFromSteps(steps: StepsData | undefined, fallback: string): DeploymentStatus {
   if (!steps) {
     return isDeploymentStatus(fallback) ? fallback : "pending";
   }

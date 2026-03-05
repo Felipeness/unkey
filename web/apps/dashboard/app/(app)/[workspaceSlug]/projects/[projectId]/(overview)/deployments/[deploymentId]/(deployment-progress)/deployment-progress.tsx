@@ -2,8 +2,9 @@
 
 import { trpc } from "@/lib/trpc/client";
 import { CloudUp, Earth, Hammer2, LayerFront, Pulse, Sparkle3 } from "@unkey/icons";
-import { Button, SettingCardGroup } from "@unkey/ui";
+import type { Router } from "@/lib/trpc/routers";
 import type { inferRouterOutputs } from "@trpc/server";
+import { Button, SettingCardGroup } from "@unkey/ui";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DeploymentDomainsCard } from "../../../../components/deployment-domains-card";
@@ -12,7 +13,6 @@ import { RedeployDialog } from "../../components/table/components/actions/redepl
 import { useDeployment } from "../layout-provider";
 import { DeploymentBuildStepsTable } from "./build-steps-table/deployment-build-steps-table";
 import { DeploymentStep } from "./deployment-step";
-import type { Router } from "@/lib/trpc/routers";
 
 type RouterOutputs = inferRouterOutputs<Router>;
 export type StepsData = RouterOutputs["deploy"]["deployment"]["steps"];

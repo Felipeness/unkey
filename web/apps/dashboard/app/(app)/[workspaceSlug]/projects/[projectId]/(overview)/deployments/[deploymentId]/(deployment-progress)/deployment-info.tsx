@@ -5,8 +5,8 @@ import { Bolt, Cloud, Grid, LayoutRight } from "@unkey/icons";
 import { Button, InfoTooltip } from "@unkey/ui";
 import { ActiveDeploymentCard } from "../../../../components/active-deployment-card";
 import {
-  DeploymentStatusBadge,
   type DeploymentStatus,
+  DeploymentStatusBadge,
 } from "../../../../components/deployment-status-badge";
 import { InfoChip } from "../../../../components/info-chip";
 import { RegionFlags } from "../../../../components/region-flags";

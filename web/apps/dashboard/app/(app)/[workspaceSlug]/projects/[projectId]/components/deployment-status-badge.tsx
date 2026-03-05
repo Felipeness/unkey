@@ -10,14 +10,14 @@ import type { IconProps } from "@unkey/icons/src/props";
 import { cn } from "@unkey/ui/src/lib/utils";
 import type { FC } from "react";
 
-type DeploymentStatus =
+export type DeploymentStatus =
   | "pending"
-  | "starting"
+  |"starting"
   | "building"
   | "deploying"
   | "network"
-  | "finalizing"
   | "ready"
+  | "finalizing"
   | "failed";
 
 type StatusConfig = {
@@ -37,12 +37,13 @@ const STATUS_CONFIG: Record<DeploymentStatus, StatusConfig> = {
     textColor: "text-grayA-11",
     iconColor: "text-gray-11",
   },
-  starting: {
-      icon: CircleHalfDottedClock,
+starting: {
+    icon: HalfDottedCirclePlay,
     label: "Starting",
-    bgColor: "bg-grayA-3",
-    textColor: "text-grayA-11",
-    iconColor: "text-gray-11",
+    bgColor: "bg-linear-to-r from-infoA-5 to-transparent",
+    textColor: "text-infoA-11",
+    iconColor: "text-info-11",
+    animated: true,
   },
   building: {
     icon: Nut,
@@ -68,8 +69,8 @@ const STATUS_CONFIG: Record<DeploymentStatus, StatusConfig> = {
     iconColor: "text-info-11",
     animated: true,
   },
-  finalizing: {
-     icon: ArrowDotAntiClockwise,
+finalizing: {
+    icon: Nut,
     label: "Finalizing",
     bgColor: "bg-linear-to-r from-infoA-5 to-transparent",
     textColor: "text-infoA-11",
