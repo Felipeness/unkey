@@ -104,16 +104,16 @@ const InstancesSingle = () => {
           onValueCommit={
             variant === "onboarding"
               ? ([value]) => {
-                if (value !== undefined && value !== defaultInstances) {
-                  collection.environmentSettings.update(settings.environmentId, (draft) => {
-                    const updated: Record<string, number> = {};
-                    for (const region of Object.keys(draft.regionConfig)) {
-                      updated[region] = value;
-                    }
-                    draft.regionConfig = updated;
-                  });
+                  if (value !== undefined && value !== defaultInstances) {
+                    collection.environmentSettings.update(settings.environmentId, (draft) => {
+                      const updated: Record<string, number> = {};
+                      for (const region of Object.keys(draft.regionConfig)) {
+                        updated[region] = value;
+                      }
+                      draft.regionConfig = updated;
+                    });
+                  }
                 }
-              }
               : undefined
           }
           className="flex-1 max-w-[480px]"
