@@ -12,7 +12,7 @@ import type { FC } from "react";
 
 export type DeploymentStatus =
   | "pending"
-  |"starting"
+  | "starting"
   | "building"
   | "deploying"
   | "network"
@@ -37,7 +37,7 @@ const STATUS_CONFIG: Record<DeploymentStatus, StatusConfig> = {
     textColor: "text-grayA-11",
     iconColor: "text-gray-11",
   },
-starting: {
+  starting: {
     icon: HalfDottedCirclePlay,
     label: "Starting",
     bgColor: "bg-linear-to-r from-infoA-5 to-transparent",
@@ -69,7 +69,7 @@ starting: {
     iconColor: "text-info-11",
     animated: true,
   },
-finalizing: {
+  finalizing: {
     icon: Nut,
     label: "Finalizing",
     bgColor: "bg-linear-to-r from-infoA-5 to-transparent",
